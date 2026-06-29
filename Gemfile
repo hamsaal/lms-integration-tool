@@ -7,6 +7,7 @@ gem "pg", "~> 1.5"
 gem "puma", ">= 5.0"
 gem "bootsnap", require: false
 gem "sidekiq", "~> 7.2"
+gem "connection_pool", "~> 2.5"
 gem "redis", "~> 5.0"
 gem "jwt", "~> 2.8"
 gem "rack-cors", "~> 2.0"
