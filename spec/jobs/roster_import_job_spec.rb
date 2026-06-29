@@ -12,9 +12,12 @@ RSpec.describe RosterImportJob, type: :job do
 
     described_class.perform_now(job_run.id, payload)
 
+    imported_user = organization.users.find_by(external_ref: "student-1")
+    imported_course = organization.courses.find_by(external_ref: "course-1")
+
     expect(job_run.reload).to be_completed
-    expect(organization.users.find_by(external_ref: "student-1")).to be_present
-    expect(Enrollment.count).to eq(1)
+    expect(imported_user).to be_present
+    expect(Enrollment.exists?(user: imported_user, course: imported_course)).to be(true)
   end
 
   it "rolls back all rows when an enrollment references a missing user" do
