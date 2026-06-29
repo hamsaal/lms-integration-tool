@@ -42,6 +42,7 @@ jobs:
           ruby-version: "3.3.0"
           bundler-cache: true
       - run: bundle exec rails db:prepare
+      - run: bundle exec rails db:seed
       - run: bundle exec rspec
 
   frontend:
@@ -56,5 +57,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
-      - run: npm install
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm audit --audit-level=moderate
       - run: npm run build

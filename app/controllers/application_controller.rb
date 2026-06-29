@@ -47,7 +47,7 @@ class ApplicationController < ActionController::API
 
   def unprocessable_entity(error)
     render json: { error: { code: "validation_error", message: error.record.errors.full_messages } },
-           status: :unprocessable_entity
+           status: :unprocessable_content
   end
 
   def bad_request(error)
