@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+bundle install
+bundle exec rails db:prepare
+(cd frontend && npm install)
+
+echo "Setup complete."

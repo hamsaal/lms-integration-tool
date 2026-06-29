@@ -1,0 +1,87 @@
+openapi: 3.1.0
+info:
+  title: Learning Integration Tool API
+  version: 0.1.0
+  description: Prototype API for Canvas-style launch, roster import, and grade passback concepts.
+servers:
+  - url: http://localhost:3000
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /api/courses:
+    get:
+      summary: List courses for the current organization.
+      responses:
+        "200":
+          description: Course list.
+    post:
+      summary: Create a course.
+      responses:
+        "201":
+          description: Course created.
+  /api/courses/{id}/assignments:
+    get:
+      summary: List course assignments.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Assignment list.
+    post:
+      summary: Create a course assignment.
+      responses:
+        "201":
+          description: Assignment created.
+  /api/assignments/{id}/submissions:
+    post:
+      summary: Submit learner activity work.
+      responses:
+        "201":
+          description: Submission created.
+  /api/submissions/{id}/grade:
+    patch:
+      summary: Grade a submission and create a pending passback record.
+      responses:
+        "200":
+          description: Submission graded.
+  /api/tool_launches:
+    post:
+      summary: Simulate an LTI-style id_token launch.
+      security: []
+      responses:
+        "201":
+          description: Launch accepted and local API token returned.
+  /api/roster_imports:
+    post:
+      summary: Enqueue a OneRoster-style roster import.
+      responses:
+        "202":
+          description: Import job queued.
+  /api/grade_syncs:
+    post:
+      summary: Enqueue a grade passback sync job.
+      responses:
+        "202":
+          description: Grade sync queued.
+  /api/job_runs/{id}:
+    get:
+      summary: Read background job status.
+      responses:
+        "200":
+          description: Job run.
+  /api/analytics/course_summary:
+    get:
+      summary: Course summary counts for instructors and admins.
+      responses:
+        "200":
+          description: Course summary.

@@ -1,0 +1,16 @@
+/.bundle
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/storage/*
+!/storage/.keep
+/vendor/bundle
+/.env
+/coverage
+/node_modules
+/frontend/node_modules
+/frontend/playwright-report
+/frontend/test-results
+/frontend/dist
+/frontend/*.tsbuildinfo
