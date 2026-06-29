@@ -129,18 +129,28 @@ curl -X POST http://localhost:3000/api/roster_imports \
 
 ## Tests
 
+Run the same core checks locally before pushing:
+
+```bash
+bin/ci
+```
+
 Backend:
 
 ```bash
-bundle exec rails db:prepare
-bundle exec rspec
+docker compose run --rm \
+  -e RAILS_ENV=test \
+  -e DATABASE_URL=postgres://postgres:postgres@postgres:5432/learning_integrations_test \
+  -e TEST_DATABASE_URL=postgres://postgres:postgres@postgres:5432/learning_integrations_test \
+  api bash -lc "bundle exec rails db:prepare && bundle exec rails db:seed && bundle exec rspec"
 ```
 
 Frontend:
 
 ```bash
 cd frontend
-npm install
+npm ci
+npm audit --audit-level=moderate
 npm run build
 ```
 
@@ -155,8 +165,8 @@ npm run test:e2e
 
 GitHub Actions runs:
 
-- Rails specs with PostgreSQL and Redis service containers.
-- React TypeScript build.
+- Rails specs with PostgreSQL and Redis service containers after loading demo seed data.
+- React dependency install, npm audit, and TypeScript production build.
 
 ## Resume Bullet
 
