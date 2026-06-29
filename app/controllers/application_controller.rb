@@ -1,3 +1,5 @@
+class AuthorizationError < StandardError; end
+
 class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity
@@ -56,5 +58,3 @@ class ApplicationController < ActionController::API
     render_error("forbidden", error.message, :forbidden)
   end
 end
-
-class AuthorizationError < StandardError; end

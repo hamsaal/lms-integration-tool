@@ -1,0 +1,14 @@
+.git
+.bundle
+coverage
+log/*
+tmp/*
+storage/*
+vendor/bundle
+node_modules
+frontend/node_modules
+frontend/dist
+frontend/playwright-report
+frontend/test-results
+frontend/*.tsbuildinfo
+.env

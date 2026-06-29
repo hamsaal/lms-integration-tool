@@ -67,7 +67,7 @@ class CreateLmsIntegrationSchema < ActiveRecord::Migration[7.1]
     add_index :submissions, %i[user_id workflow_state]
 
     create_table :grades do |t|
-      t.references :submission, null: false, foreign_key: true
+      t.references :submission, null: false, foreign_key: true, index: false
       t.references :assignment, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
       t.decimal :score, precision: 8, scale: 2, null: false
