@@ -20,7 +20,7 @@ This project is intentionally scoped as a prototype. It simulates Canvas launch 
 ## Architecture
 
 - **Backend:** Rails 7 API-only app with PostgreSQL, ActiveRecord, JWT bearer auth, and Sidekiq.
-- **Frontend:** React + Vite single-page app for the launch and activity flow.
+- **Frontend:** React + Vite single-page app for the launch, learner activity, and admin console flows.
 - **Data model:** Organizations own users, courses, launches, audit logs, and background job runs. Courses contain enrollments and assignments. Learners create submissions. Instructors grade submissions, creating passback-ready grade records.
 - **Background jobs:** Roster import and grade sync use Sidekiq with Redis.
 - **Privacy-aware handling:** Audit logs avoid raw tokens and filter common PII keys. Normal API serializers avoid exposing email unless explicitly needed by a development-only auth endpoint.
