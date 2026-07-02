@@ -16,6 +16,7 @@ RSpec.describe RosterImportJob, type: :job do
     imported_course = organization.courses.find_by(external_ref: "course-1")
 
     expect(job_run.reload).to be_completed
+    expect(job_run.metadata).to include("users_count" => 1, "courses_count" => 1, "enrollments_count" => 1)
     expect(imported_user).to be_present
     expect(Enrollment.exists?(user: imported_user, course: imported_course)).to be(true)
   end
@@ -28,7 +29,7 @@ RSpec.describe RosterImportJob, type: :job do
       enrollments: [{ userSourcedId: "missing", classSourcedId: "course-1", role: "student", status: "active" }]
     }
 
-    expect { described_class.perform_now(job_run.id, payload) }.to raise_error(ActiveRecord::RecordNotFound)
+    expect { described_class.perform_now(job_run.id, payload) }.to raise_error(RosterImportProcessor::ValidationError)
     expect(organization.courses).to be_empty
     expect(job_run.reload).to be_failed
   end

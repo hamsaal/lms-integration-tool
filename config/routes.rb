@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     patch "submissions/:id/grade", to: "submissions#grade"
     post "tool_launches", to: "tool_launches#create"
+    post "roster_imports/preview", to: "roster_imports#preview"
     post "roster_imports", to: "roster_imports#create"
     post "grade_syncs", to: "grade_syncs#create"
     get "job_runs/:id", to: "job_runs#show"
