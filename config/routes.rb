@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     post "grade_syncs", to: "grade_syncs#create"
     get "job_runs/:id", to: "job_runs#show"
     get "analytics/course_summary", to: "analytics#course_summary"
+    get "audit_logs", to: "audit_logs#index"
   end
 
   get "up", to: proc { [200, { "Content-Type" => "application/json" }, [{ status: "ok" }.to_json]] }
