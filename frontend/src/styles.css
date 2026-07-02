@@ -183,3 +183,133 @@ textarea {
     flex-direction: column;
   }
 }
+
+.admin-header {
+  align-items: center;
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+  margin: 34px auto 14px;
+  max-width: 1160px;
+}
+
+.admin-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0;
+}
+
+.admin-status {
+  background: #eef6e7;
+  border-color: #c9ddb7;
+}
+
+.admin-console {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1.2fr 0.8fr;
+  margin: 0 auto;
+  max-width: 1160px;
+}
+
+.roster-panel {
+  grid-row: span 2;
+}
+
+label {
+  color: #405268;
+  display: grid;
+  font-size: 0.88rem;
+  font-weight: 700;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.roster-panel textarea {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 0.84rem;
+  min-height: 82px;
+}
+
+input {
+  border: 1px solid #c6d1dd;
+  border-radius: 8px;
+  font: inherit;
+  min-height: 42px;
+  padding: 0 12px;
+}
+
+.button-row,
+.audit-filter {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.metric-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 16px;
+}
+
+.metric-grid div,
+.job-card,
+.audit-item {
+  background: #f5f8fb;
+  border-radius: 8px;
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+}
+
+.metric-grid strong {
+  font-size: 1.35rem;
+}
+
+.metric-grid span,
+.job-card span,
+.audit-item span,
+.empty-state {
+  color: #52657b;
+}
+
+.job-card {
+  margin-bottom: 14px;
+}
+
+.audit-filter input {
+  flex: 1 1 220px;
+}
+
+.audit-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.audit-item code {
+  color: #2f445b;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.admin-console .secondary-action,
+.admin-header .secondary-action {
+  margin-left: 0;
+}
+
+@media (max-width: 760px) {
+  .admin-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-console,
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+}
