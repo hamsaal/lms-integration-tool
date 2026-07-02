@@ -157,8 +157,7 @@ npm run build
 End-to-end:
 
 ```bash
-cd frontend
-npm run test:e2e
+bin/e2e
 ```
 
 ## CI
@@ -167,6 +166,7 @@ GitHub Actions runs:
 
 - Rails specs with PostgreSQL and Redis service containers after loading demo seed data.
 - React dependency install, npm audit, and TypeScript production build.
+- Docker-backed Playwright flow covering launch, learner submission, and instructor grading.
 
 ## Resume Bullet
 
