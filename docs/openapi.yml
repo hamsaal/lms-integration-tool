@@ -93,3 +93,25 @@ paths:
       responses:
         "200":
           description: Course summary.
+  /api/audit_logs:
+    get:
+      summary: List sanitized audit logs for organization admins.
+      parameters:
+        - name: event
+          in: query
+          schema:
+            type: string
+        - name: target_type
+          in: query
+          schema:
+            type: string
+        - name: created_since
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        "200":
+          description: Audit log list.
+        "403":
+          description: Admin role required.

@@ -117,6 +117,13 @@ curl -X POST http://localhost:3000/api/roster_imports/preview \
   }'
 ```
 
+Read sanitized audit logs as an admin:
+
+```bash
+curl "http://localhost:3000/api/audit_logs?event=submission.created" \
+  -H "Authorization: Bearer <admin-token>"
+```
+
 Queue a roster import:
 
 ```bash
