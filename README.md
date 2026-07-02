@@ -102,6 +102,21 @@ curl -X PATCH http://localhost:3000/api/submissions/1/grade \
   -d '{"grade":{"score":9}}'
 ```
 
+Preview a roster import without persisting rows:
+
+```bash
+curl -X POST http://localhost:3000/api/roster_imports/preview \
+  -H "Authorization: Bearer <admin-token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "roster": {
+      "users_csv": "sourcedId,name,email,role\nstudent-2,Sam Learner,sam@example.edu,student",
+      "classes_csv": "sourcedId,title,classCode,status\nclass-2,Algebra,ALG-1,active",
+      "enrollments_csv": "userSourcedId,classSourcedId,role,status\nstudent-2,class-2,student,active"
+    }
+  }'
+```
+
 Queue a roster import:
 
 ```bash

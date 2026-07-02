@@ -61,9 +61,17 @@ paths:
       responses:
         "201":
           description: Launch accepted and local API token returned.
+  /api/roster_imports/preview:
+    post:
+      summary: Validate a OneRoster-style roster import and return row counts without persisting records.
+      responses:
+        "200":
+          description: Import preview counts.
+        "422":
+          description: Import validation failed.
   /api/roster_imports:
     post:
-      summary: Enqueue a OneRoster-style roster import.
+      summary: Validate and enqueue a OneRoster-style roster import.
       responses:
         "202":
           description: Import job queued.
