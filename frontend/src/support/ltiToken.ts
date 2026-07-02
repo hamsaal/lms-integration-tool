@@ -1,3 +1,6 @@
+import Base64 from "crypto-js/enc-base64";
+import HmacSHA256 from "crypto-js/hmac-sha256";
+
 const encoder = new TextEncoder();
 
 export async function createDemoLaunchToken() {
@@ -6,7 +9,7 @@ export async function createDemoLaunchToken() {
     iss: "https://canvas.example.edu",
     aud: "learning-integrations-rails-api",
     sub: "student-001",
-    nonce: `nonce-${crypto.randomUUID()}`,
+    nonce: `nonce-${randomNonce()}`,
     exp: now + 300,
     name: "Alex Student",
     email: "student@example.edu",
@@ -24,12 +27,21 @@ export async function createDemoLaunchToken() {
   return signHs256(payload, import.meta.env.VITE_DEMO_JWT_SECRET ?? "development-only-secret");
 }
 
-async function signHs256(payload: Record<string, unknown>, secret: string) {
+function randomNonce() {
+  const value = new Uint8Array(16);
+  crypto.getRandomValues(value);
+  return Array.from(value, (byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+function signHs256(payload: Record<string, unknown>, secret: string) {
   const header = { alg: "HS256", typ: "JWT" };
-  const body = `${base64Url(JSON.stringify(header))}.${base64Url(JSON.stringify(payload))}`;
-  const key = await crypto.subtle.importKey("raw", encoder.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
-  const signature = await crypto.subtle.sign("HMAC", key, encoder.encode(body));
-  return `${body}.${base64Url(signature)}`;
+  const body = base64Url(JSON.stringify(header)) + "." + base64Url(JSON.stringify(payload));
+  const signature = HmacSHA256(body, secret).toString(Base64);
+  return body + "." + base64ToUrl(signature);
+}
+
+function base64ToUrl(value: string) {
+  return value.split("+").join("-").split("/").join("_").replace(/=+$/, "");
 }
 
 function base64Url(input: string | ArrayBuffer) {
